@@ -1,6 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
 const NAME = "Lalit";
 const TITLE = "Aspiring AI Engineer";
@@ -9,6 +11,8 @@ const CHAR_DELAY = 0.08;
 const TITLE_DELAY = NAME.length * CHAR_DELAY + 0.2;
 const TAGLINE_DELAY = TITLE_DELAY + TITLE.length * CHAR_DELAY + 0.25;
 const CTA_DELAY = TAGLINE_DELAY + 0.45;
+const POP_INTERVAL_MS = 2500;
+const BASE_POP_INTENSITY = 0.45;
 
 type TypewriterLineProps = {
   text: string;
@@ -36,8 +40,71 @@ function TypewriterLine({ text, delay = 0, className }: TypewriterLineProps) {
 }
 
 export function Hero() {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const [isHeroActive, setIsHeroActive] = useState(true);
+  const [popTick, setPopTick] = useState(0);
+  const [popIntensity, setPopIntensity] = useState(BASE_POP_INTENSITY);
+
+  useEffect(() => {
+    const sectionNode = sectionRef.current;
+    if (!sectionNode) return;
+
+    let lastScrollY = window.scrollY;
+    let lastScrollTime = performance.now();
+    let lastTriggerTime = 0;
+
+    const triggerPop = (intensity = BASE_POP_INTENSITY) => {
+      setPopIntensity(Math.max(0.3, Math.min(1, intensity)));
+      setPopTick((prev) => prev + 1);
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsHeroActive(entry.isIntersecting && entry.intersectionRatio > 0.55);
+      },
+      {
+        threshold: [0.2, 0.4, 0.55, 0.75, 1],
+      },
+    );
+    observer.observe(sectionNode);
+
+    const handleScroll = () => {
+      if (!isHeroActive) return;
+
+      const now = performance.now();
+      const deltaY = Math.abs(window.scrollY - lastScrollY);
+      const deltaT = Math.max(16, now - lastScrollTime);
+      const speed = deltaY / deltaT;
+      const sinceLastTrigger = now - lastTriggerTime;
+
+      if (speed > 0.45 && sinceLastTrigger > 280) {
+        const intensity = BASE_POP_INTENSITY + Math.min(0.5, speed * 0.22);
+        triggerPop(intensity);
+        lastTriggerTime = now;
+      }
+
+      lastScrollY = window.scrollY;
+      lastScrollTime = now;
+    };
+
+    // Initial hero landing pulse.
+    const initialPulse = window.setTimeout(() => triggerPop(BASE_POP_INTENSITY), 350);
+    const intervalId = window.setInterval(() => {
+      if (isHeroActive) triggerPop(BASE_POP_INTENSITY);
+    }, POP_INTERVAL_MS);
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", handleScroll);
+      window.clearTimeout(initialPulse);
+      window.clearInterval(intervalId);
+    };
+  }, [isHeroActive]);
+
   return (
-    <section id="top" className="relative isolate flex h-screen overflow-hidden px-6 text-left sm:px-10 lg:px-16">
+    <section ref={sectionRef} id="top" className="relative isolate flex h-screen overflow-hidden px-6 text-left sm:px-10 lg:px-16">
       <svg
         aria-hidden="true"
         focusable="false"
@@ -90,6 +157,38 @@ export function Hero() {
           View My Work
         </motion.a>
       </div>
+
+      <motion.div
+        key={popTick}
+        aria-hidden="true"
+        initial={{ opacity: 0, x: "58%", y: "72%", scale: 0.8, rotate: -22 }}
+        animate={
+          isHeroActive
+            ? {
+                opacity: [0, 1, 1, 0.15, 0],
+                x: ["58%", "12%", "12%", "34%", "58%"],
+                y: ["72%", "8%", "8%", "42%", "72%"],
+                scale: [0.8, 1.14 + popIntensity * 0.12, 1.12 + popIntensity * 0.1, 0.92, 0.8],
+                rotate: [-24, -7, -7, -14, -22],
+              }
+            : { opacity: 0, x: "58%", y: "72%", scale: 0.8, rotate: -22 }
+        }
+        transition={{
+          duration: 3.4,
+          times: [0, 0.26, 0.62, 0.82, 1],
+          ease: ["easeOut", "easeInOut", "easeIn"],
+        }}
+        className="pointer-events-none absolute bottom-0 right-0 z-20 origin-bottom-right select-none [perspective:1000px]"
+      >
+        <Image
+          src="/hero-photo.png"
+          alt="Portrait of Lalit"
+          width={640}
+          height={640}
+          priority
+          className="h-auto w-[clamp(360px,48vw,820px)] mix-blend-screen"
+        />
+      </motion.div>
     </section>
   );
 }

@@ -65,6 +65,10 @@ export function FluidBackground() {
     let lastFrameTime = 0;
     let currentOpacity = SECTION_OPACITY.top;
     let targetOpacity = SECTION_OPACITY.top;
+    let bloomCurrent = 0;
+    let bloomTarget = 0;
+    let lastScrollY = window.scrollY;
+    let lastScrollTime = performance.now();
 
     let fieldWidth = Math.max(160, Math.floor(width * FIELD_SCALE));
     let fieldHeight = Math.max(120, Math.floor(height * FIELD_SCALE));
@@ -174,6 +178,22 @@ export function FluidBackground() {
       cursorTarget.y = height / 2;
     };
 
+    const handleScroll = () => {
+      const now = performance.now();
+      const dy = Math.abs(window.scrollY - lastScrollY);
+      const dt = Math.max(16, now - lastScrollTime);
+      const speed = dy / dt; // pixels/ms
+
+      // Trigger bloom only on fast scroll bursts, then let it decay.
+      if (speed > 0.75) {
+        const normalized = Math.min(1, (speed - 0.75) / 2.2);
+        bloomTarget = Math.max(bloomTarget, normalized);
+      }
+
+      lastScrollY = window.scrollY;
+      lastScrollTime = now;
+    };
+
     const animate = (now: number) => {
       rafRef.current = window.requestAnimationFrame(animate);
       const delta = now - lastFrameTime;
@@ -184,6 +204,8 @@ export function FluidBackground() {
       cursorCurrent.x += (cursorTarget.x - cursorCurrent.x) * 0.09;
       cursorCurrent.y += (cursorTarget.y - cursorCurrent.y) * 0.09;
       currentOpacity += (targetOpacity - currentOpacity) * 0.06;
+      bloomCurrent += (bloomTarget - bloomCurrent) * 0.16;
+      bloomTarget *= 0.9;
 
       ctx.clearRect(0, 0, width, height);
       ctx.globalCompositeOperation = "screen";
@@ -265,7 +287,10 @@ export function FluidBackground() {
       }
 
       fieldCtx.putImageData(fieldImage, 0, 0);
-      ctx.filter = "blur(24px) saturate(90%)";
+      const bloomBlur = 24 + bloomCurrent * 14;
+      const bloomSaturate = 90 + bloomCurrent * 20;
+      const bloomBrightness = 100 + bloomCurrent * 48;
+      ctx.filter = `blur(${bloomBlur.toFixed(1)}px) saturate(${bloomSaturate.toFixed(1)}%) brightness(${bloomBrightness.toFixed(1)}%)`;
       ctx.drawImage(fieldCanvas, 0, 0, fieldWidth, fieldHeight, 0, 0, width, height);
       ctx.filter = "none";
 
@@ -277,6 +302,7 @@ export function FluidBackground() {
     window.addEventListener("resize", updateCanvasSize);
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("mouseleave", handleMouseLeave);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     rafRef.current = window.requestAnimationFrame(animate);
 
     return () => {
@@ -287,6 +313,7 @@ export function FluidBackground() {
       window.removeEventListener("resize", updateCanvasSize);
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseleave", handleMouseLeave);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
