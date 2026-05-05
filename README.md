@@ -1,29 +1,29 @@
 <div align="center">
 
-  ```
-                                            ██╗      █████╗ ██╗     ██╗████████╗
-                                            ██║     ██╔══██╗██║     ██║╚══██╔══╝
-                                            ██║     ███████║██║     ██║   ██║   
-                                            ██║     ██╔══██║██║     ██║   ██║   
-                                            ███████╗██║  ██║███████╗██║   ██║   
-                                            ╚══════╝╚═╝  ╚═╝╚══════╝╚═╝   ╚═╝  
+```
+██╗      █████╗ ██╗     ██╗████████╗
+██║     ██╔══██╗██║     ██║╚══██╔══╝
+██║     ███████║██║     ██║   ██║   
+██║     ██╔══██║██║     ██║   ██║   
+███████╗██║  ██║███████╗██║   ██║   
+╚══════╝╚═╝  ╚═╝╚══════╝╚═╝   ╚═╝  
 
-                                            ██╗  ██╗██╗   ██╗███╗   ███╗ █████╗ ██████╗
-                                            ██║ ██╔╝██║   ██║████╗ ████║██╔══██╗██╔══██╗
-                                            █████╔╝ ██║   ██║██╔████╔██║███████║██████╔╝
-                                            ██╔═██╗ ██║   ██║██║╚██╔╝██║██╔══██║██╔══██╗
-                                            ██║  ██╗╚██████╔╝██║ ╚═╝ ██║██║  ██║██║  ██║
-                                            ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝
+██╗  ██╗██╗   ██╗███╗   ███╗ █████╗ ██████╗
+██║ ██╔╝██║   ██║████╗ ████║██╔══██╗██╔══██╗
+█████╔╝ ██║   ██║██╔████╔██║███████║██████╔╝
+██╔═██╗ ██║   ██║██║╚██╔╝██║██╔══██║██╔══██╗
+██║  ██╗╚██████╔╝██║ ╚═╝ ██║██║  ██║██║  ██║
+╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝
 
-                                            ██╗   ██╗ █████╗ ██████╗ ██████╗ ██╗███╗   ██╗ █████╗
-                                            ██║   ██║██╔══██╗██╔══██╗██╔══██╗██║████╗  ██║██╔══██╗
-                                            ██║   ██║███████║██║  ██║██║  ██║██║██╔██╗ ██║███████║
-                                            ╚██╗ ██╔╝██╔══██║██║  ██║██║  ██║██║██║╚██╗██║██╔══██║
-                                             ╚████╔╝ ██║  ██║██████╔╝██████╔╝██║██║ ╚████║██║  ██║
-                                              ╚═══╝  ╚═╝  ╚═╝╚═════╝ ╚═════╝ ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝
+██╗   ██╗ █████╗ ██████╗ ██████╗ ██╗███╗   ██╗ █████╗
+██║   ██║██╔══██╗██╔══██╗██╔══██╗██║████╗  ██║██╔══██╗
+██║   ██║███████║██║  ██║██║  ██║██║██╔██╗ ██║███████║
+╚██╗ ██╔╝██╔══██║██║  ██║██║  ██║██║██║╚██╗██║██╔══██║
+ ╚████╔╝ ██║  ██║██████╔╝██████╔╝██║██║ ╚████║██║  ██║
+  ╚═══╝  ╚═╝  ╚═╝╚═════╝ ╚═════╝ ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝
 ```
 
-###       Aspiring AI Engineer · Builder 
+### aspiring AI engineer · builder · still figuring it out
 
 [![Live Site](https://img.shields.io/badge/LIVE_SITE-ff4d1a?style=for-the-badge&logo=vercel&logoColor=white)](https://lalitsportfoliopage.vercel.app)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/lalitkvaddina/)
@@ -38,13 +38,13 @@
 
 ---
 
-## What even is this?
+## what even is this?
 
 A personal portfolio that actually feels personal.
 
 Not a Tailwind starter kit with my name swapped in.  
 Not a dribbble shot pretending to be a website.  
-Not another hero section with `gradient-to-r from-purple-500`.  
+Not another hero section with `gradient-to-r from-purple-500`.
 
 This is **sharp**, **dark**, **motion-heavy** — and built around how I want my brand to feel: technical, direct, experimental, and brutally honest about where I am in the journey.
 
@@ -53,22 +53,22 @@ This is **sharp**, **dark**, **motion-heavy** — and built around how I want my
 
 ---
 
-## What's inside
+## what's inside
 
 ```
 lalitsportfoliopage/
-├── Hero          → first impression. animated. has my face.
-├── Work          → real projects loading soon™
-├── Skills        → honest comfort ratings (no cap)
-├── Education     → the academic paper trail
-├── Blog          → public learning, unfiltered
-├── About         → the short version of the story
-└── Contact       → real links, real inbox
+├── Hero       → first impression. animated. has my face.
+├── Work       → real projects loading soon™
+├── Skills     → honest comfort ratings (no cap)
+├── Education  → the academic paper trail
+├── Blog       → public learning, unfiltered
+├── About      → the short version of the story
+└── Contact    → real links, real inbox
 ```
 
 ---
 
-## Highlights Worth Mentioning
+## highlights worth mentioning
 
 - **Animated hero** with a fluid ambient canvas — not a stock photo
 - **Skills section** that doesn't lie about my comfort levels
@@ -78,7 +78,7 @@ lalitsportfoliopage/
 
 ---
 
-## Tech stack
+## tech stack
 
 | tool | what it's doing here |
 |---|---|
@@ -93,7 +93,7 @@ No unnecessary dependencies. No UI kits. Styled from scratch.
 
 ---
 
-## To Run it locally
+## run it locally
 
 ```bash
 # clone it
@@ -117,7 +117,7 @@ npm run build   # seriously, don't skip this
 
 ---
 
-## Find me @:
+## find me
 
 <div align="center">
 
@@ -132,7 +132,7 @@ npm run build   # seriously, don't skip this
 
 ---
 
-## Current Status
+## current status
 
 ```
 [████████████░░░░░░░░] 60% complete
