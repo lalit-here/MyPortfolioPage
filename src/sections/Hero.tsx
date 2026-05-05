@@ -105,6 +105,10 @@ export function Hero() {
 
   return (
     <section ref={sectionRef} id="top" className="relative isolate flex h-screen overflow-hidden px-6 text-left sm:px-10 lg:px-16">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-[12%] top-[28%] -z-10 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,rgba(167,139,250,0.28)_0%,rgba(167,139,250,0.08)_34%,rgba(0,0,0,0)_70%)] blur-2xl"
+      />
       <svg
         aria-hidden="true"
         focusable="false"

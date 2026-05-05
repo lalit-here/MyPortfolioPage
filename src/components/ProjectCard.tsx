@@ -13,10 +13,10 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
     <motion.article
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      whileHover={{ scale: 1.01 }}
+      whileHover={{ scale: 1.01, y: -4 }}
       viewport={{ once: true, amount: 0.25 }}
       transition={{ duration: 0.2, delay: index * 0.1 }}
-      className="mb-6 break-inside-avoid border border-[rgba(240,253,244,0.08)] bg-background p-6 transition-[border-color,box-shadow] duration-200 hover:border-primary hover:shadow-[0_0_20px_rgba(74,222,128,0.15)]"
+      className="mb-6 break-inside-avoid border border-[rgba(240,253,244,0.08)] bg-background p-6 transition-[border-color,box-shadow,transform] duration-200 hover:border-primary hover:shadow-[0_12px_34px_rgba(74,222,128,0.16)]"
     >
       <div className="flex items-start justify-between gap-6">
         <h3 className="font-heading text-[clamp(1.5rem,2.4vw,2rem)] font-bold leading-tight tracking-[-0.04em] text-text-main">

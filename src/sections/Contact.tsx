@@ -3,9 +3,10 @@
 import { motion } from "framer-motion";
 
 const links = [
-  { label: "Email", href: "mailto:email@lalit.dev", value: "email@lalit.dev" },
-  { label: "LinkedIn", href: "https://linkedin.com/in/lalit", value: "linkedin.com/in/lalit" },
-  { label: "GitHub", href: "https://github.com/lalit", value: "github.com/lalit" },
+  { label: "Email", href: "mailto:lalit.k.vaddina@gmail.com", value: "lalit.k.vaddina@gmail.com" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/lalitkvaddina/", value: "linkedin.com/in/lalitkvaddina" },
+  { label: "GitHub", href: "https://github.com/lalit-here", value: "github.com/lalit-here" },
+  { label: "Instagram", href: "https://www.instagram.com/lalit_jpeg/", value: "instagram.com/lalit_jpeg" },
 ];
 
 export function Contact() {
@@ -26,7 +27,7 @@ export function Contact() {
               Let&apos;s build something.
             </h2>
 
-            <p className="mt-8 max-w-2xl font-mono text-[clamp(1rem,1.6vw,1.125rem)] leading-8 text-text-muted">
+            <p className="mt-8 max-w-[66ch] font-mono text-[clamp(1rem,1.6vw,1.125rem)] leading-8 text-text-muted">
               Send a note if you want to talk AI systems, frontend builds, or useful experiments.
             </p>
 
@@ -34,7 +35,7 @@ export function Contact() {
               <h3 className="font-heading text-[clamp(1.5rem,3.5vw,2.4rem)] font-bold leading-tight text-text-main">
                 Open to AI/Backend internships, collaborations, and freelance builds.
               </h3>
-              <p className="mt-4 font-sans text-base leading-7 text-text-muted">
+              <p className="mt-4 max-w-[62ch] font-sans text-base leading-7 text-text-muted">
                 If you are building practical systems and need execution support, I can help with agentic workflows, API
                 integrations, and product-ready frontend implementation.
               </p>
@@ -50,20 +51,23 @@ export function Contact() {
               <p>Response window: 24-48 hrs</p>
               <p>Timezone: IST (UTC+5:30)</p>
               <p>Mode: Remote / Hybrid</p>
+              <p>Resume: Coming soon</p>
             </div>
           </div>
         </div>
 
-        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid min-w-0 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {links.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="group flex items-center justify-between border border-[rgba(240,253,244,0.08)] px-4 py-4 font-mono text-xs uppercase tracking-[0.18em] text-text-main transition-colors duration-200 hover:border-primary hover:text-primary"
+              className="group grid min-w-0 grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 border border-[rgba(240,253,244,0.08)] px-3 py-4 font-mono text-[11px] uppercase tracking-[0.16em] text-text-main transition-colors duration-200 hover:border-primary hover:text-primary sm:px-4 sm:text-xs sm:tracking-[0.18em]"
             >
-              <span className="shrink-0">{link.label}</span>
-              <span className="truncate px-3 text-text-muted">/ {link.value}</span>
-              <span className="transition-transform duration-200 group-hover:translate-x-1">-&gt;</span>
+              <span className="shrink-0 whitespace-nowrap">{link.label}</span>
+              <span className="min-w-0 truncate text-text-muted">/ {link.value}</span>
+              <span className="shrink-0 whitespace-nowrap transition-transform duration-200 group-hover:translate-x-0.5">
+                -&gt;
+              </span>
             </a>
           ))}
         </div>

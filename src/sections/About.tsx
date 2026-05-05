@@ -32,13 +32,13 @@ export function About() {
               About
             </h2>
           </div>
-          <p className="max-w-md font-sans text-base leading-7 text-text-muted">
+          <p className="max-w-[58ch] font-sans text-base leading-7 text-text-muted">
             Practical-first builder focused on shipping useful AI systems and maintainable frontend experiences.
           </p>
         </div>
 
         <div className="mt-12 grid gap-10 lg:grid-cols-[minmax(0,1fr)_320px]">
-          <p className="max-w-4xl font-sans text-[clamp(1.125rem,2.1vw,1.5rem)] leading-9 text-text-main md:leading-10">
+          <p className="max-w-[68ch] font-sans text-[clamp(1.125rem,2.1vw,1.5rem)] leading-9 text-text-main md:leading-10">
             I am still learning AI and machine learning, and I like being honest about that. Right now I am focused on
             building agentic AI systems that can take real tasks, break them down, and produce useful work instead of just
             impressive demos. I also have some frontend experience, which helps me turn experiments into interfaces people
