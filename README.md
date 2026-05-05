@@ -1,78 +1,156 @@
-# Lalit Kumar Vaddina — Portfolio
+<div align="center">
 
-A raw, high-contrast portfolio built to present my work, skills, writing, and story as an aspiring AI engineer.
+```
+██╗      █████╗ ██╗     ██╗████████╗
+██║     ██╔══██╗██║     ██║╚══██╔══╝
+██║     ███████║██║     ██║   ██║   
+██║     ██╔══██║██║     ██║   ██║   
+███████╗██║  ██║███████╗██║   ██║   
+╚══════╝╚═╝  ╚═╝╚══════╝╚═╝   ╚═╝  
 
-This site is not trying to look like another soft SaaS template. It is sharp, dark, motion-heavy, and built around the way I want my personal brand to feel: technical, direct, experimental, and practical.
+██╗  ██╗██╗   ██╗███╗   ███╗ █████╗ ██████╗
+██║ ██╔╝██║   ██║████╗ ████║██╔══██╗██╔══██╗
+█████╔╝ ██║   ██║██╔████╔██║███████║██████╔╝
+██╔═██╗ ██║   ██║██║╚██╔╝██║██╔══██║██╔══██╗
+██║  ██╗╚██████╔╝██║ ╚═╝ ██║██║  ██║██║  ██║
+╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝
 
-Live: https://lalitsportfoliopage.vercel.app
-
-## What This Is
-
-This is my personal portfolio website. It introduces who I am, what I am learning, the tools I work with, my education, my writing, and how to reach me.
-
-The goal is simple: make a portfolio that feels like mine, not a copied template.
-
-## Highlights
-
-- Custom animated hero section with my portrait
-- Fluid ambient canvas background
-- Skills section with honest comfort ratings
-- Education timeline covering university, Class XII, and Class X
-- Blog section connected to my DEV article
-- Contact section with real links
-- Dynamic Open Graph image for clean link previews
-- Vercel Analytics and Speed Insights integration
-
-## Tech Stack
-
-```text
-Next.js        App Router portfolio framework
-React          UI layer
-TypeScript     Type safety
-Tailwind CSS   Styling system
-Framer Motion  Motion and scroll animation
-Vercel         Deployment, analytics, speed insights
+██╗   ██╗ █████╗ ██████╗ ██████╗ ██╗███╗   ██╗ █████╗
+██║   ██║██╔══██╗██╔══██╗██╔══██╗██║████╗  ██║██╔══██╗
+██║   ██║███████║██║  ██║██║  ██║██║██╔██╗ ██║███████║
+╚██╗ ██╔╝██╔══██║██║  ██║██║  ██║██║██║╚██╗██║██╔══██║
+ ╚████╔╝ ██║  ██║██████╔╝██████╔╝██║██║ ╚████║██║  ██║
+  ╚═══╝  ╚═╝  ╚═╝╚═════╝ ╚═════╝ ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝
 ```
 
-## Sections
+###       Aspiring AI Engineer · Builder 
 
-- `Hero` — first impression, tagline, and visual identity
-- `Work` — reserved for real public projects once they are ready
-- `Skills` — current technical stack and comfort levels
-- `Education` — academic background
-- `Blog` — writing and public learning
-- `About` — short personal intro
-- `Contact` — email and social links
+[![Live Site](https://img.shields.io/badge/LIVE_SITE-ff4d1a?style=for-the-badge&logo=vercel&logoColor=white)](https://lalitsportfoliopage.vercel.app)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/lalitkvaddina/)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/lalit-here)
+[![DEV](https://img.shields.io/badge/DEV.to-0A0A0A?style=for-the-badge&logo=devdotto&logoColor=white)](https://dev.to)
 
-## Local Setup
+![Status](https://img.shields.io/badge/status-always_evolving-ff4d1a?style=flat-square)
+![Built with](https://img.shields.io/badge/vibes-immaculate-black?style=flat-square)
+![Template](https://img.shields.io/badge/template-absolutely_not-333?style=flat-square)
+
+</div>
+
+---
+
+## What even is this?
+
+A personal portfolio that actually feels personal.
+
+Not a Tailwind starter kit with my name swapped in.  
+Not a dribbble shot pretending to be a website.  
+Not another hero section with `gradient-to-r from-purple-500`.  
+
+This is **sharp**, **dark**, **motion-heavy** — and built around how I want my brand to feel: technical, direct, experimental, and brutally honest about where I am in the journey.
+
+> *"Make a portfolio that feels like mine, not a copied template."*  
+> — me, to myself, at 2am
+
+---
+
+## What's inside
+
+```
+lalitsportfoliopage/
+├── Hero          → first impression. animated. has my face.
+├── Work          → real projects loading soon™
+├── Skills        → honest comfort ratings (no cap)
+├── Education     → the academic paper trail
+├── Blog          → public learning, unfiltered
+├── About         → the short version of the story
+└── Contact       → real links, real inbox
+```
+
+---
+
+## Highlights Worth Mentioning
+
+- **Animated hero** with a fluid ambient canvas — not a stock photo
+- **Skills section** that doesn't lie about my comfort levels
+- **Blog** wired directly to my DEV articles
+- **Dynamic Open Graph image** so link previews don't embarrass me
+- **Vercel Analytics + Speed Insights** because performance matters
+
+---
+
+## Tech stack
+
+| tool | what it's doing here |
+|---|---|
+| **Next.js** | App Router — the whole foundation |
+| **React** | UI layer, you know the deal |
+| **TypeScript** | so future-me doesn't hate present-me |
+| **Tailwind CSS** | styling without the stylesheet spiral |
+| **Framer Motion** | everything that moves |
+| **Vercel** | ships it, tracks it, keeps it fast |
+
+No unnecessary dependencies. No UI kits. Styled from scratch.
+
+---
+
+## To Run it locally
 
 ```bash
+# clone it
+git clone https://github.com/lalit-here/portfolio
+
+# install stuff
 npm install
+
+# start cooking
 npm run dev
 ```
 
-Open:
+Open → `http://localhost:3000`
 
-```text
-http://localhost:3000
-```
-
-## Checks
+**before you push anything:**
 
 ```bash
-npm run lint
-npm run build
+npm run lint    # don't skip this
+npm run build   # seriously, don't skip this
 ```
 
-## Contact
+---
 
-```text
-Email     lalit.k.vaddina@gmail.com
-LinkedIn  https://www.linkedin.com/in/lalitkvaddina/
-GitHub    https://github.com/lalit-here
-Instagram https://www.instagram.com/lalit_jpeg/
+## Find me @:
+
+<div align="center">
+
+| platform | handle |
+|---|---|
+| Email | lalit.k.vaddina@gmail.com |
+| LinkedIn | [lalitkvaddina](https://www.linkedin.com/in/lalitkvaddina/) |
+| GitHub | [lalit-here](https://github.com/lalit-here) |
+| Instagram | [lalit_jpeg](https://www.instagram.com/lalit_jpeg/) |
+
+</div>
+
+---
+
+## Current Status
+
+```
+[████████████░░░░░░░░] 60% complete
+
+[x] core sections live
+[x] motion and animations
+[x] blog connected
+[~] Work section — filling with real projects
+[~] deeper technical writeups
+[ ] more proof of work incoming
 ```
 
-## Note
+This site is a living document. Placeholders become case studies. Vague sections become proof of work. Come back in a few weeks — it'll be different.
 
-This portfolio is still evolving. I will keep replacing placeholders with real project case studies, deeper technical writeups, and proof of work as I build more.
+---
+
+<div align="center">
+
+*Built by Lalit. Stolen by no one.*
+
+</div>
