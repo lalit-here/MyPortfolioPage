@@ -5,7 +5,6 @@ export function useActiveSection(sectionIds: string[]): string {
 
   useEffect(() => {
     if (sectionIds.length === 0) {
-      setActiveSection("");
       return;
     }
 
