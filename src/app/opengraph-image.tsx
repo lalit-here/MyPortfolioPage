@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { getSiteHostnameLabel } from "@/lib/site-config";
 
 export const runtime = "edge";
 export const alt = "Lalit Kumar Vaddina portfolio preview";
@@ -9,6 +10,8 @@ export const size = {
 export const contentType = "image/png";
 
 export default function OpenGraphImage() {
+  const siteLabel = getSiteHostnameLabel();
+
   return new ImageResponse(
     (
       <div
@@ -73,7 +76,7 @@ export default function OpenGraphImage() {
           }}
         >
           <span>Agentic AI / LLMs / Frontend</span>
-          <span style={{ color: "#4ade80" }}>lalitsportfoliopage.vercel.app</span>
+          <span style={{ color: "#4ade80" }}>{siteLabel}</span>
         </div>
       </div>
     ),

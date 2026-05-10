@@ -1,15 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
+import type { SiteContactLink } from "@/lib/site-config";
 
-const links = [
-  { label: "Email", href: "mailto:lalit.k.vaddina@gmail.com", value: "lalit.k.vaddina@gmail.com" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/lalitkvaddina/", value: "linkedin.com/in/lalitkvaddina" },
-  { label: "GitHub", href: "https://github.com/lalit-here", value: "github.com/lalit-here" },
-  { label: "Instagram", href: "https://www.instagram.com/lalit_jpeg/", value: "instagram.com/lalit_jpeg" },
-];
+type ContactProps = {
+  links: SiteContactLink[];
+  resumeUrl?: string;
+};
 
-export function Contact() {
+export function Contact({ links, resumeUrl }: ContactProps) {
   return (
     <motion.section
       id="contact"
@@ -51,15 +50,29 @@ export function Contact() {
               <p>Response window: 24-48 hrs</p>
               <p>Timezone: IST (UTC+5:30)</p>
               <p>Mode: Remote / Hybrid</p>
-              <p>Resume: Coming soon</p>
+              <p>
+                Resume:{" "}
+                {resumeUrl ? (
+                  <a href={resumeUrl} className="text-primary underline-offset-4 hover:underline">
+                    Open / download
+                  </a>
+                ) : (
+                  "Coming soon"
+                )}
+              </p>
             </div>
           </div>
         </div>
 
         <div className="mt-14 grid min-w-0 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {links.length === 0 && process.env.NODE_ENV === "development" ? (
+            <p className="col-span-full font-mono text-sm text-text-muted">
+              Add CONTACT_EMAIL, LINKEDIN_URL, GITHUB_URL, and/or INSTAGRAM_URL in .env.local (see .env.example).
+            </p>
+          ) : null}
           {links.map((link) => (
             <a
-              key={link.href}
+              key={`${link.label}-${link.href}`}
               href={link.href}
               className="group grid min-w-0 grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 border border-[rgba(240,253,244,0.08)] px-3 py-4 font-mono text-[11px] uppercase tracking-[0.16em] text-text-main transition-colors duration-200 hover:border-primary hover:text-primary sm:px-4 sm:text-xs sm:tracking-[0.18em]"
             >

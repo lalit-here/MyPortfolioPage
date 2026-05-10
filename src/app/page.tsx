@@ -1,4 +1,9 @@
 import { FluidBackground } from "@/components/FluidBackground";
+import {
+  getBlogFeaturedUrl,
+  getContactLinks,
+  getResumeUrl,
+} from "@/lib/site-config";
 import { About } from "@/sections/About";
 import { Blog } from "@/sections/Blog";
 import { Contact } from "@/sections/Contact";
@@ -9,6 +14,10 @@ import { Skills } from "@/sections/Skills";
 import { Work } from "@/sections/Work";
 
 export default function Home() {
+  const contactLinks = getContactLinks();
+  const blogFeaturedUrl = getBlogFeaturedUrl();
+  const resumeUrl = getResumeUrl();
+
   return (
     <>
       <FluidBackground />
@@ -19,9 +28,9 @@ export default function Home() {
           <Work />
           <Skills />
           <Education />
-          <Blog />
+          <Blog featuredHref={blogFeaturedUrl} />
           <About />
-          <Contact />
+          <Contact links={contactLinks} resumeUrl={resumeUrl} />
         </main>
       </div>
     </>

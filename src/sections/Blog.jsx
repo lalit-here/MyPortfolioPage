@@ -2,18 +2,19 @@
 
 import { motion } from "framer-motion";
 
-const articles = [
-  {
-    title: "Vibe coding is a tool, not a shortcut. Most people are using it wrong.",
-    description:
-      "A practical take on where AI-assisted coding helps, where it falls apart, and why judgment still matters more than the prompt.",
-    tags: ["Vibe Coding", "AI", "Productivity", "Career"],
-    readTime: "DEV article",
-    href: "https://dev.to/lalit-here/vibe-coding-is-a-tool-not-a-shortcut-most-people-are-using-it-wrong-2gkn",
-  },
-];
+const featuredArticle = {
+  title: "Vibe coding is a tool, not a shortcut. Most people are using it wrong.",
+  description:
+    "A practical take on where AI-assisted coding helps, where it falls apart, and why judgment still matters more than the prompt.",
+  tags: ["Vibe Coding", "AI", "Productivity", "Career"],
+  readTime: "DEV article",
+};
 
-export function Blog() {
+/**
+ * @param {{ featuredHref?: string }} props URL from `BLOG_FEATURED_URL` (server-injected).
+ */
+export function Blog({ featuredHref }) {
+  const articles = featuredHref ? [{ ...featuredArticle, href: featuredHref }] : [];
   return (
     <motion.section
       id="blog"
@@ -37,31 +38,39 @@ export function Blog() {
         </div>
 
         <div className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {articles.map((article) => (
-            <a
-              key={article.title}
-              href={article.href}
-              target="_blank"
-              rel="noreferrer"
-              className="group block border border-[rgba(240,253,244,0.08)] bg-[rgba(0,0,0,0.28)] p-6 transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-1 hover:border-primary hover:shadow-[0_0_20px_rgba(74,222,128,0.15)]"
-            >
-              <p className="font-mono text-xs uppercase tracking-[0.2em] text-text-muted">{article.readTime}</p>
-              <h3 className="mt-3 font-heading text-[clamp(1.35rem,2.6vw,2rem)] font-bold leading-tight text-text-main transition-colors group-hover:text-primary">
-                {article.title}
-              </h3>
-              <p className="mt-4 font-sans text-base leading-7 text-text-muted">{article.description}</p>
-              <div className="mt-5 flex flex-wrap gap-2">
-                {article.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="border border-accent px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-accent"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </a>
-          ))}
+          {articles.length === 0 ? (
+            <p className="font-mono text-sm text-text-muted">
+              {process.env.NODE_ENV === "development"
+                ? "Set BLOG_FEATURED_URL in .env.local to feature an article."
+                : "Latest writing will appear here soon."}
+            </p>
+          ) : (
+            articles.map((article) => (
+              <a
+                key={article.title}
+                href={article.href}
+                target="_blank"
+                rel="noreferrer"
+                className="group block border border-[rgba(240,253,244,0.08)] bg-[rgba(0,0,0,0.28)] p-6 transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-1 hover:border-primary hover:shadow-[0_0_20px_rgba(74,222,128,0.15)]"
+              >
+                <p className="font-mono text-xs uppercase tracking-[0.2em] text-text-muted">{article.readTime}</p>
+                <h3 className="mt-3 font-heading text-[clamp(1.35rem,2.6vw,2rem)] font-bold leading-tight text-text-main transition-colors group-hover:text-primary">
+                  {article.title}
+                </h3>
+                <p className="mt-4 font-sans text-base leading-7 text-text-muted">{article.description}</p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {article.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="border border-accent px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-accent"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </a>
+            ))
+          )}
         </div>
       </div>
     </motion.section>

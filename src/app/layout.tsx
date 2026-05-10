@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import { getCanonicalSiteUrl } from "@/lib/site-config";
 import "./globals.css";
-
-const siteUrl = "https://lalitsportfoliopage.vercel.app";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -17,7 +16,7 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? siteUrl),
+  metadataBase: getCanonicalSiteUrl(),
   title: "Lalit Kumar Vaddina | Aspiring AI Engineer",
   description: "Portfolio of Lalit Kumar Vaddina, an aspiring AI engineer building practical AI systems and frontend experiences.",
   alternates: {

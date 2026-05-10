@@ -1,5 +1,6 @@
 import { Ratelimit, type Duration } from "@upstash/ratelimit";
-import { Redis } from "@upstash/redis";
+import { Redis } from "@upstash/redis/cloudflare";
+import { sanitizeClientIp } from "@/lib/input-validation";
 import { NextResponse, type NextRequest } from "next/server";
 
 export function json429(retryAfterSeconds: number, message: string) {
@@ -83,11 +84,11 @@ export function getClientIp(request: NextRequest): string {
   const forwarded = request.headers.get("x-forwarded-for");
   if (forwarded) {
     const first = forwarded.split(",")[0]?.trim();
-    if (first) return first;
+    if (first) return sanitizeClientIp(first);
   }
   const realIp = request.headers.get("x-real-ip")?.trim();
-  if (realIp) return realIp;
-  return "127.0.0.1";
+  if (realIp) return sanitizeClientIp(realIp);
+  return sanitizeClientIp(null);
 }
 
 /**

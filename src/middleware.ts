@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { validateApiRequestUrl } from "@/lib/input-validation";
 import {
   attachRateLimitHeaders,
   checkRateLimit,
@@ -6,8 +6,14 @@ import {
   isLoginRoute,
   json429,
 } from "@/lib/rate-limit";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function middleware(request: NextRequest) {
+  const urlCheck = validateApiRequestUrl(request.nextUrl);
+  if (!urlCheck.ok) {
+    return urlCheck.response;
+  }
+
   try {
     const pathname = request.nextUrl.pathname;
     const ip = getClientIp(request);
@@ -35,9 +41,8 @@ export async function middleware(request: NextRequest) {
     const res = NextResponse.next();
     attachRateLimitHeaders(res, result);
     return res;
-  } catch (e) {
-    console.error("Middleware error:", e);
-    return NextResponse.next();
+  } catch {
+    return NextResponse.json({ error: "Service unavailable" }, { status: 503 });
   }
 }
 
