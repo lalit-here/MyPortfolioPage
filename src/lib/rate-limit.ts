@@ -1,5 +1,5 @@
 import { Ratelimit, type Duration } from "@upstash/ratelimit";
-import { Redis } from "@upstash/redis/cloudflare";
+import { Redis } from "@upstash/redis";
 import { NextResponse, type NextRequest } from "next/server";
 
 export function json429(retryAfterSeconds: number, message: string) {
