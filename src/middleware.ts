@@ -8,6 +8,8 @@ import {
 } from "@/lib/rate-limit";
 
 export async function middleware(request: NextRequest) {
+  return NextResponse.next(); // temporary bypass
+
   const pathname = request.nextUrl.pathname;
   const ip = getClientIp(request);
 
