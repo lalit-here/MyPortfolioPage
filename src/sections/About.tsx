@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import type { Variants } from "framer-motion";
 
 const skills = [
   "Python",
@@ -14,6 +15,15 @@ const skills = [
   "API Integration",
 ];
 
+const tagVariants: Variants = {
+  hidden: { opacity: 0, y: 14 },
+  visible: (index: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: index * 0.035, duration: 0.3, ease: [0.16, 1, 0.3, 1] },
+  }),
+};
+
 export function About() {
   return (
     <motion.section
@@ -22,11 +32,11 @@ export function About() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.25 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="border-t border-[rgba(255,255,255,0.06)] px-6 py-28 sm:px-10 lg:px-16"
+      className="scroll-section border-t border-[rgba(255,255,255,0.06)] px-6 py-28 sm:px-10 lg:px-16"
     >
       <div className="mx-auto max-w-[1200px]">
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,380px)] lg:items-end">
-          <div>
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,380px)] lg:items-start">
+          <div className="lg:sticky lg:top-28">
             <p className="font-mono text-xs font-bold uppercase tracking-[0.45em] text-text-muted">Profile</p>
             <h2 className="mt-5 font-heading text-[clamp(3.2rem,8.5vw,7.4rem)] font-bold leading-[0.88] tracking-[-0.07em] text-text-main">
               About
@@ -58,13 +68,18 @@ export function About() {
         </div>
 
         <div className="mt-12 flex max-w-5xl flex-wrap gap-3">
-          {skills.map((skill) => (
-            <span
+          {skills.map((skill, index) => (
+            <motion.span
               key={skill}
+              custom={index}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.35 }}
+              variants={tagVariants}
               className="border border-accent bg-transparent px-3 py-2 font-mono text-xs uppercase tracking-[0.16em] text-accent"
             >
               {skill}
-            </span>
+            </motion.span>
           ))}
         </div>
       </div>

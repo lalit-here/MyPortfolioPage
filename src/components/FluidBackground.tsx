@@ -27,11 +27,14 @@ type Disturbance = {
 const SECTION_OPACITY: Record<string, number> = {
   top: 1,
   work: 0.5,
+  skills: 0.62,
+  education: 0.46,
+  blog: 0.58,
   about: 0.3,
   contact: 0.85,
 };
 
-const SECTION_IDS = ["top", "work", "about", "contact"] as const;
+const SECTION_IDS = ["top", "work", "skills", "education", "blog", "about", "contact"] as const;
 const FPS_INTERVAL = 1000 / 60;
 const FIELD_SCALE = 0.18;
 const FIELD_THRESHOLD = 1;

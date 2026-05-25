@@ -162,6 +162,25 @@ export function Hero() {
         </motion.a>
       </div>
 
+      <motion.a
+        href="#work"
+        aria-label="Scroll to work section"
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: CTA_DELAY + 0.3, duration: 0.45, ease: "easeOut" }}
+        className="absolute bottom-8 left-6 hidden items-center gap-3 font-mono text-[10px] uppercase tracking-[0.28em] text-text-muted transition-colors duration-200 hover:text-primary sm:left-10 md:flex lg:left-16"
+      >
+        <span className="h-px w-10 bg-[linear-gradient(90deg,#4ade80,transparent)]" />
+        Scroll
+        <motion.span
+          animate={{ y: [0, 5, 0] }}
+          transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+          className="text-accent"
+        >
+          v
+        </motion.span>
+      </motion.a>
+
       <motion.div
         key={popTick}
         aria-hidden="true"

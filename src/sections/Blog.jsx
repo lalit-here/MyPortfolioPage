@@ -10,6 +10,11 @@ const featuredArticle = {
   readTime: "DEV article",
 };
 
+const articleVariants = {
+  hidden: { opacity: 0, y: 22 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.38, ease: "easeOut" } },
+};
+
 /**
  * @param {{ featuredHref?: string }} props URL from `BLOG_FEATURED_URL` (server-injected).
  */
@@ -22,7 +27,7 @@ export function Blog({ featuredHref }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.45, ease: "easeOut" }}
-      className="border-t border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.015)] px-6 py-28 sm:px-10 lg:px-16"
+      className="scroll-section border-t border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.015)] px-6 py-28 sm:px-10 lg:px-16"
     >
       <div className="mx-auto max-w-[1200px]">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,380px)] lg:items-end">
@@ -46,11 +51,15 @@ export function Blog({ featuredHref }) {
             </p>
           ) : (
             articles.map((article) => (
-              <a
+              <motion.a
                 key={article.title}
                 href={article.href}
                 target="_blank"
                 rel="noreferrer"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.35 }}
+                variants={articleVariants}
                 className="group block border border-[rgba(240,253,244,0.08)] bg-[rgba(0,0,0,0.28)] p-6 transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-1 hover:border-primary hover:shadow-[0_0_20px_rgba(74,222,128,0.15)]"
               >
                 <p className="font-mono text-xs uppercase tracking-[0.2em] text-text-muted">{article.readTime}</p>
@@ -68,7 +77,7 @@ export function Blog({ featuredHref }) {
                     </span>
                   ))}
                 </div>
-              </a>
+              </motion.a>
             ))
           )}
         </div>

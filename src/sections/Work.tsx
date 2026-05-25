@@ -5,6 +5,8 @@ import { ProjectCard } from "@/components/ProjectCard";
 import { projects } from "@/data/projects";
 
 export function Work() {
+  const hasProjects = projects.length > 0;
+
   return (
     <motion.section
       id="work"
@@ -12,7 +14,9 @@ export function Work() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.45, ease: "easeOut" }}
-      className="border-t border-[rgba(255,255,255,0.06)] px-6 py-28 sm:px-10 lg:px-16"
+      className={`scroll-section border-t border-[rgba(255,255,255,0.06)] px-6 pt-28 sm:px-10 lg:px-16 ${
+        hasProjects ? "pb-28" : "pb-14"
+      }`}
     >
       <div className="mx-auto max-w-[1200px]">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,380px)] lg:items-end">
@@ -38,7 +42,7 @@ export function Work() {
           </motion.p>
         </div>
 
-        {projects.length > 0 && (
+        {hasProjects && (
           <div className="mt-14 columns-1 gap-7 md:columns-2">
             {projects.map((project, index) => (
               <ProjectCard key={project.id} project={project} index={index} />

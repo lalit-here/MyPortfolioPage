@@ -163,7 +163,10 @@ let upstashRatelimits: { login: Ratelimit; api: Ratelimit } | null = null;
 function getUpstashRatelimits(): { login: Ratelimit; api: Ratelimit } {
   if (upstashRatelimits) return upstashRatelimits;
 
-  const redis = Redis.fromEnv();
+  const redis = new Redis({
+    url: process.env.UPSTASH_REDIS_REST_URL!,
+    token: process.env.UPSTASH_REDIS_REST_TOKEN!,
+  });
   const loginCfg = getLoginRateLimitConfig();
   const apiCfg = getApiRateLimitConfig();
   const loginWindow = windowMsToUpstashWindow(loginCfg.windowMs);

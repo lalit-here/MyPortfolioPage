@@ -32,6 +32,15 @@ const education = [
   },
 ];
 
+const itemVariants = {
+  hidden: { opacity: 0, y: 22 },
+  visible: (index) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: index * 0.06, duration: 0.38, ease: "easeOut" },
+  }),
+};
+
 export function Education() {
   return (
     <motion.section
@@ -40,11 +49,11 @@ export function Education() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.45, ease: "easeOut" }}
-      className="border-t border-[rgba(255,255,255,0.06)] px-6 py-28 sm:px-10 lg:px-16"
+      className="scroll-section border-t border-[rgba(255,255,255,0.06)] px-6 py-28 sm:px-10 lg:px-16"
     >
       <div className="mx-auto max-w-[1200px]">
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,380px)] lg:items-end">
-          <div>
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,380px)] lg:items-start">
+          <div className="lg:sticky lg:top-28">
             <p className="font-mono text-xs font-bold uppercase tracking-[0.45em] text-text-muted">Academics</p>
             <h2 className="mt-5 font-heading text-[clamp(2.6rem,7vw,5.8rem)] font-bold leading-[0.9] tracking-[-0.06em] text-text-main">
               Education
@@ -56,9 +65,14 @@ export function Education() {
         </div>
 
         <div className="mt-14 grid gap-5">
-          {education.map((entry) => (
-            <article
+          {education.map((entry, index) => (
+            <motion.article
               key={`${entry.level}-${entry.institution}`}
+              custom={index}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              variants={itemVariants}
               className="border border-[rgba(240,253,244,0.08)] bg-[rgba(255,255,255,0.015)] p-7 md:p-8"
             >
               <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_220px] lg:items-start">
@@ -77,7 +91,7 @@ export function Education() {
                   <p className="text-primary">{entry.result}</p>
                 </div>
               </div>
-            </article>
+            </motion.article>
           ))}
         </div>
       </div>

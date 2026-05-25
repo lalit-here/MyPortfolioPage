@@ -1,4 +1,5 @@
 import { FluidBackground } from "@/components/FluidBackground";
+import { ScrollChoreography } from "@/components/ScrollChoreography";
 import {
   getBlogFeaturedUrl,
   getContactLinks,
@@ -21,9 +22,10 @@ export default function Home() {
   return (
     <>
       <FluidBackground />
+      <ScrollChoreography />
       <div className="relative z-10">
         <Navbar />
-        <main>
+        <main className="relative">
           <Hero />
           <Work />
           <Skills />

@@ -58,6 +58,15 @@ const skillGroups = [
   },
 ];
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: (index) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: index * 0.05, duration: 0.38, ease: "easeOut" },
+  }),
+};
+
 export function Skills() {
   return (
     <motion.section
@@ -66,11 +75,11 @@ export function Skills() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.45, ease: "easeOut" }}
-      className="border-t border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.015)] px-6 py-28 sm:px-10 lg:px-16"
+      className="scroll-section border-t border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.015)] px-6 py-28 sm:px-10 lg:px-16"
     >
       <div className="mx-auto max-w-[1200px]">
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,380px)] lg:items-end">
-          <div>
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,380px)] lg:items-start">
+          <div className="lg:sticky lg:top-28">
             <p className="font-mono text-xs font-bold uppercase tracking-[0.45em] text-text-muted">Capabilities</p>
             <h2 className="mt-5 font-heading text-[clamp(3.2rem,8.5vw,7.4rem)] font-bold leading-[0.88] tracking-[-0.07em] text-text-main">
               Skills
@@ -82,9 +91,14 @@ export function Skills() {
         </div>
 
         <div className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {skillGroups.map((group) => (
-            <article
+          {skillGroups.map((group, index) => (
+            <motion.article
               key={group.title}
+              custom={index}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.25 }}
+              variants={cardVariants}
               className="border border-[rgba(240,253,244,0.08)] bg-[rgba(0,0,0,0.3)] p-6 transition-[transform,border-color,box-shadow] duration-200 hover:-translate-y-1 hover:border-primary hover:shadow-[0_10px_24px_rgba(74,222,128,0.12)]"
             >
               <h3 className="font-mono text-xs font-bold uppercase tracking-[0.24em] text-accent">{group.title}</h3>
@@ -101,7 +115,7 @@ export function Skills() {
                   </li>
                 ))}
               </ul>
-            </article>
+            </motion.article>
           ))}
         </div>
       </div>

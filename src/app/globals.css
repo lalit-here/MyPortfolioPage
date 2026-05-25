@@ -35,3 +35,33 @@ body {
   outline: 2px solid var(--color-accent);
   outline-offset: 4px;
 }
+
+.scroll-section {
+  position: relative;
+  isolation: isolate;
+  scroll-margin-top: 5rem;
+}
+
+.scroll-section::before,
+.scroll-section::after {
+  content: "";
+  position: absolute;
+  left: clamp(1.5rem, 4vw, 4rem);
+  right: clamp(1.5rem, 4vw, 4rem);
+  pointer-events: none;
+}
+
+.scroll-section::before {
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(74, 222, 128, 0.22), rgba(250, 204, 21, 0.16), transparent);
+  opacity: 0.55;
+}
+
+.scroll-section::after {
+  bottom: 0;
+  height: 140px;
+  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.22));
+  opacity: 0.52;
+  z-index: -1;
+}
