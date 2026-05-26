@@ -38,7 +38,7 @@
 
 ---
 
-## what even is this?
+## What even is this?
 
 A personal portfolio that actually feels personal.
 
@@ -53,7 +53,7 @@ This is **sharp**, **dark**, **motion-heavy** — and built around how I want my
 
 ---
 
-## what's inside
+## What's inside
 
 ```
 lalitsportfoliopage/
@@ -68,7 +68,7 @@ lalitsportfoliopage/
 
 ---
 
-## highlights worth mentioning
+## Highlights worth mentioning
 
 - **Animated hero** with a fluid ambient canvas — not a stock photo
 - **Skills section** that doesn't lie about my comfort levels
@@ -78,7 +78,7 @@ lalitsportfoliopage/
 
 ---
 
-## tech stack
+## Tech stack
 
 | tool | what it's doing here |
 |---|---|
@@ -93,7 +93,7 @@ No unnecessary dependencies. No UI kits. Styled from scratch.
 
 ---
 
-## run it locally
+## Run it locally
 
 ```bash
 # clone it
@@ -108,7 +108,7 @@ npm run dev
 
 Open → `http://localhost:3000`
 
-**before you push anything:**
+**Before you push anything:**
 
 ```bash
 npm run lint    # don't skip this
@@ -117,7 +117,7 @@ npm run build   # seriously, don't skip this
 
 ---
 
-## find me
+## Find me
 
 <div align="center">
 
@@ -132,7 +132,7 @@ npm run build   # seriously, don't skip this
 
 ---
 
-## current status
+## Current status
 
 ```
 [████████████░░░░░░░░] 60% complete
