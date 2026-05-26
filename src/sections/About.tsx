@@ -5,14 +5,18 @@ import type { Variants } from "framer-motion";
 
 const skills = [
   "Python",
-  "Machine Learning",
-  "Agentic AI",
-  "LLMs",
+  "Java",
+  "JavaScript",
+  "React.js",
   "Next.js",
   "Tailwind CSS",
-  "Prompt Engineering",
-  "RAG",
-  "API Integration",
+  "Node.js",
+  "Express.js",
+  "PostgreSQL",
+  "MongoDB",
+  "Supabase",
+  "Git/GitHub",
+  "Vercel",
 ];
 
 const tagVariants: Variants = {
@@ -34,11 +38,17 @@ export function About() {
       transition={{ duration: 0.5, ease: "easeOut" }}
       className="scroll-section border-t border-[rgba(255,255,255,0.06)] px-6 py-28 sm:px-10 lg:px-16"
     >
+      <p
+        aria-hidden="true"
+        className="pointer-events-none absolute right-6 top-6 hidden font-mono text-[10px] uppercase tracking-[0.24em] text-text-muted/45 sm:right-10 sm:block lg:right-16"
+      >
+        05 / About
+      </p>
       <div className="mx-auto max-w-[1200px]">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,380px)] lg:items-start">
           <div className="lg:sticky lg:top-28">
             <p className="font-mono text-xs font-bold uppercase tracking-[0.45em] text-text-muted">Profile</p>
-            <h2 className="mt-5 font-heading text-[clamp(3.2rem,8.5vw,7.4rem)] font-bold leading-[0.88] tracking-[-0.07em] text-text-main">
+            <h2 className="mt-5 font-heading text-[clamp(2.9rem,10vw,7.4rem)] font-bold leading-[0.88] tracking-[-0.07em] text-text-main">
               About
             </h2>
           </div>

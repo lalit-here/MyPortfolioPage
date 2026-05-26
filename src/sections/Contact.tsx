@@ -138,13 +138,29 @@ export function Contact({ links, resumeUrl }: ContactProps) {
       transition={{ duration: 0.5, ease: "easeOut" }}
       className="scroll-section border-t border-[rgba(255,255,255,0.06)] px-6 py-28 sm:px-10 lg:px-16"
     >
+      <p
+        aria-hidden="true"
+        className="pointer-events-none absolute right-6 top-6 hidden font-mono text-[10px] uppercase tracking-[0.24em] text-text-muted/45 sm:right-10 sm:block lg:right-16"
+      >
+        06 / Contact
+      </p>
       <div className="mx-auto max-w-[1200px]">
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_340px]">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_260px] lg:items-start">
           <div className="lg:sticky lg:top-28">
             <p className="font-mono text-xs font-bold uppercase tracking-[0.45em] text-text-muted">Contact</p>
-            <h2 className="mt-5 max-w-5xl bg-[linear-gradient(90deg,#4ade80_0%,#facc15_100%)] bg-clip-text pb-3 font-heading text-[clamp(4rem,10vw,9rem)] font-bold leading-[0.98] tracking-[-0.08em] text-transparent">
-              Let&apos;s build something.
-            </h2>
+            <span className="mt-5 inline-flex items-center gap-2 border border-[rgba(74,222,128,0.32)] bg-[rgba(74,222,128,0.05)] px-3 py-2 font-mono text-[10px] uppercase tracking-[0.2em] text-primary">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_10px_rgba(74,222,128,0.75)]" />
+              Available / Open
+            </span>
+            <div className="relative mt-5">
+              <div
+                aria-hidden="true"
+                className="absolute -inset-x-4 -inset-y-3 -z-10 bg-[radial-gradient(circle_at_20%_35%,rgba(74,222,128,0.18),transparent_42%),radial-gradient(circle_at_65%_55%,rgba(250,204,21,0.11),transparent_38%)] blur-2xl"
+              />
+              <h2 className="max-w-5xl bg-[linear-gradient(90deg,#4ade80_0%,#facc15_100%)] bg-clip-text pb-3 font-heading text-[clamp(3.2rem,14vw,9rem)] font-bold leading-[0.98] tracking-[-0.08em] text-transparent">
+                Let&apos;s build something.
+              </h2>
+            </div>
 
             <p className="mt-8 max-w-[66ch] font-mono text-[clamp(1rem,1.6vw,1.125rem)] leading-8 text-text-muted">
               Send a note if you want to talk AI systems, frontend builds, or useful experiments.
@@ -161,12 +177,9 @@ export function Contact({ links, resumeUrl }: ContactProps) {
             </div>
           </div>
 
-          <div className="border border-[rgba(240,253,244,0.08)] bg-[rgba(0,0,0,0.3)] p-5">
+          <div className="max-h-[180px] w-full max-w-[260px] self-start justify-self-start overflow-hidden border border-[rgba(240,253,244,0.08)] bg-[rgba(0,0,0,0.3)] px-4 py-3">
             <p className="font-mono text-[11px] uppercase tracking-[0.26em] text-accent">Direct Reach</p>
-            <p className="mt-4 font-sans text-sm leading-6 text-text-muted">
-              Best way to connect for opportunities, collaboration, or project discussions.
-            </p>
-            <div className="mt-6 space-y-3 font-mono text-xs uppercase tracking-[0.16em] text-text-main">
+            <div className="mt-3 space-y-2 font-mono text-[10px] uppercase tracking-[0.13em] text-text-main">
               <p>Response window: 24-48 hrs</p>
               <p>Timezone: IST (UTC+5:30)</p>
               <p>Mode: Remote / Hybrid</p>
@@ -192,6 +205,18 @@ export function Contact({ links, resumeUrl }: ContactProps) {
           transition={{ duration: 0.4, ease: "easeOut" }}
           className="mt-14 border border-[rgba(240,253,244,0.08)] bg-[rgba(0,0,0,0.3)] p-5 md:p-6"
         >
+          <div className="mb-6 flex flex-col gap-3 border-b border-[rgba(240,253,244,0.08)] pb-5 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="font-mono text-[11px] uppercase tracking-[0.26em] text-accent">Message Pipeline</p>
+              <p className="mt-2 max-w-xl font-sans text-sm leading-6 text-text-muted">
+                Validated route into my inbox. Short, useful context works best.
+              </p>
+            </div>
+            <span className="inline-flex w-fit items-center gap-2 border border-[rgba(74,222,128,0.35)] px-3 py-2 font-mono text-[10px] uppercase tracking-[0.18em] text-primary">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_10px_rgba(74,222,128,0.75)]" />
+              Inbox Live
+            </span>
+          </div>
           <div className="grid gap-4 md:grid-cols-2">
             <label className="block">
               <span className="sr-only">Your name</span>

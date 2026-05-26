@@ -8,50 +8,50 @@ export function useActiveSection(sectionIds: string[]): string {
       return;
     }
 
-    const visibleSections = new Map<string, number>();
-
     const updateActiveSection = () => {
-      let mostVisibleId = "";
-      let highestRatio = 0;
+      const viewportFocusY = window.innerHeight * 0.42;
+      let nextActiveSection = "";
+      let closestDistance = Number.POSITIVE_INFINITY;
 
-      visibleSections.forEach((ratio, id) => {
-        if (ratio > highestRatio) {
-          mostVisibleId = id;
-          highestRatio = ratio;
+      sectionIds.forEach((id) => {
+        const section = document.getElementById(id);
+        if (!section) return;
+
+        const rect = section.getBoundingClientRect();
+        const isNearViewport = rect.bottom >= 0 && rect.top <= window.innerHeight;
+
+        if (!isNearViewport) return;
+
+        if (rect.top <= viewportFocusY && rect.bottom >= viewportFocusY) {
+          nextActiveSection = id;
+          closestDistance = 0;
+          return;
+        }
+
+        const distance = Math.min(Math.abs(rect.top - viewportFocusY), Math.abs(rect.bottom - viewportFocusY));
+        if (distance < closestDistance) {
+          nextActiveSection = id;
+          closestDistance = distance;
         }
       });
 
-      setActiveSection(mostVisibleId);
+      setActiveSection(nextActiveSection);
     };
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const id = entry.target.id;
+    let frameId = 0;
+    const scheduleUpdate = () => {
+      window.cancelAnimationFrame(frameId);
+      frameId = window.requestAnimationFrame(updateActiveSection);
+    };
 
-          if (entry.isIntersecting) {
-            visibleSections.set(id, entry.intersectionRatio);
-          } else {
-            visibleSections.delete(id);
-          }
-        });
-
-        updateActiveSection();
-      },
-      { threshold: 0.4 },
-    );
-
-    sectionIds.forEach((id) => {
-      const section = document.getElementById(id);
-
-      if (section) {
-        observer.observe(section);
-      }
-    });
+    updateActiveSection();
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
 
     return () => {
-      observer.disconnect();
-      visibleSections.clear();
+      window.cancelAnimationFrame(frameId);
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
     };
   }, [sectionIds]);
 

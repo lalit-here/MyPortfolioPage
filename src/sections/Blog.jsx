@@ -29,11 +29,17 @@ export function Blog({ featuredHref }) {
       transition={{ duration: 0.45, ease: "easeOut" }}
       className="scroll-section border-t border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.015)] px-6 py-28 sm:px-10 lg:px-16"
     >
+      <p
+        aria-hidden="true"
+        className="pointer-events-none absolute right-6 top-6 hidden font-mono text-[10px] uppercase tracking-[0.24em] text-text-muted/45 sm:right-10 sm:block lg:right-16"
+      >
+        04 / Blog
+      </p>
       <div className="mx-auto max-w-[1200px]">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,380px)] lg:items-end">
           <div>
             <p className="font-mono text-xs font-bold uppercase tracking-[0.45em] text-text-muted">Writing</p>
-            <h2 className="mt-5 font-heading text-[clamp(2.6rem,7vw,5.8rem)] font-bold leading-[0.9] tracking-[-0.06em] text-text-main">
+            <h2 className="mt-5 font-heading text-[clamp(2.4rem,9vw,5.8rem)] font-bold leading-[0.9] tracking-[-0.06em] text-text-main">
               Blog
             </h2>
           </div>

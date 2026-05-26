@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useActiveSection } from "@/hooks/useActiveSection";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const links = [
   { id: "work", href: "#work", label: "Work" },
@@ -15,9 +15,50 @@ const links = [
 
 const sectionIds = links.map((link) => link.id);
 
+type ActiveHue = {
+  opacity: number;
+  width: number;
+  x: number;
+};
+
 export function Navbar() {
   const activeSection = useActiveSection(sectionIds);
   const [open, setOpen] = useState(false);
+  const desktopLinksRef = useRef<HTMLDivElement | null>(null);
+  const linkRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
+  const [activeHue, setActiveHue] = useState<ActiveHue>({ opacity: 0, width: 0, x: 0 });
+
+  useEffect(() => {
+    const desktopLinks = desktopLinksRef.current;
+    const activeLink = linkRefs.current[activeSection];
+
+    if (!desktopLinks || !activeLink) {
+      setActiveHue((current) => ({ ...current, opacity: 0 }));
+      return;
+    }
+
+    const updateHuePosition = () => {
+      const containerRect = desktopLinks.getBoundingClientRect();
+      const linkRect = activeLink.getBoundingClientRect();
+      const width = Math.max(28, Math.min(54, linkRect.width + 12));
+
+      setActiveHue({
+        opacity: 1,
+        width,
+        x: linkRect.left - containerRect.left + linkRect.width / 2 - width / 2,
+      });
+    };
+
+    updateHuePosition();
+
+    const frameId = window.requestAnimationFrame(updateHuePosition);
+    window.addEventListener("resize", updateHuePosition);
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+      window.removeEventListener("resize", updateHuePosition);
+    };
+  }, [activeSection]);
 
   return (
     <header className="sticky top-0 z-50 w-full max-w-[100vw] overflow-x-hidden border-b border-[rgba(255,255,255,0.08)] bg-background/90 backdrop-blur-md">
@@ -39,17 +80,30 @@ export function Navbar() {
           Menu
         </button>
 
-        <div className="hidden items-center gap-6 text-text-muted lg:flex">
-          {links.map((link) => (
-            <a
-              key={link.id}
-              href={link.href}
-              className={activeSection === link.id ? "text-accent" : "transition-colors duration-200 hover:text-primary"}
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
+        <div ref={desktopLinksRef} className="relative hidden items-center gap-6 text-text-muted lg:flex">
+          <motion.span
+            aria-hidden="true"
+            animate={activeHue}
+            transition={{ type: "spring", stiffness: 155, damping: 28, mass: 0.9 }}
+            className="pointer-events-none absolute -bottom-2 left-0 h-px bg-[linear-gradient(90deg,transparent,#facc15,transparent)] shadow-[0_0_16px_rgba(250,204,21,0.38)]"
+          />
+          {links.map((link) => {
+            const isActive = activeSection === link.id;
+
+            return (
+              <a
+                key={link.id}
+                ref={(node) => {
+                  linkRefs.current[link.id] = node;
+                }}
+                href={link.href}
+                className={`relative transition-colors duration-300 ${isActive ? "text-accent" : "hover:text-primary"}`}
+              >
+                {link.label}
+              </a>
+            );
+          })}
+          </div>
       </nav>
 
       <AnimatePresence>

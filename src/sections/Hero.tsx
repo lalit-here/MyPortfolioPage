@@ -120,6 +120,10 @@ export function Hero() {
         </filter>
         <rect width="100%" height="100%" filter="url(#hero-noise-filter)" />
       </svg>
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-1/3 bg-[linear-gradient(180deg,transparent,rgba(0,0,0,0.72))]"
+      />
 
       <div className="flex w-full max-w-[1200px] flex-col justify-center pt-10">
         <motion.p
@@ -131,14 +135,14 @@ export function Hero() {
           Portfolio / AI Engineering
         </motion.p>
 
-        <h1 className="font-heading text-[clamp(4rem,12vw,10rem)] font-black leading-[0.85] tracking-[-0.06em]">
+        <h1 className="font-heading text-[clamp(3.5rem,18vw,10rem)] font-black leading-[0.85] tracking-[-0.06em]">
           <TypewriterLine
             text={NAME}
             className="bg-[linear-gradient(to_right,#4ade80_0%,#facc15_100%)] bg-clip-text text-transparent"
           />
         </h1>
 
-        <h2 className="mt-6 max-w-5xl font-heading text-[clamp(2rem,5vw,4.75rem)] font-bold leading-[0.95] tracking-[-0.05em] text-text-main">
+        <h2 className="mt-6 max-w-5xl font-heading text-[clamp(1.75rem,7vw,4.75rem)] font-bold leading-[0.95] tracking-[-0.05em] text-text-main">
           <TypewriterLine text={TITLE} delay={TITLE_DELAY} />
         </h2>
 
@@ -161,25 +165,6 @@ export function Hero() {
           View My Work
         </motion.a>
       </div>
-
-      <motion.a
-        href="#work"
-        aria-label="Scroll to work section"
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: CTA_DELAY + 0.3, duration: 0.45, ease: "easeOut" }}
-        className="absolute bottom-8 left-6 hidden items-center gap-3 font-mono text-[10px] uppercase tracking-[0.28em] text-text-muted transition-colors duration-200 hover:text-primary sm:left-10 md:flex lg:left-16"
-      >
-        <span className="h-px w-10 bg-[linear-gradient(90deg,#4ade80,transparent)]" />
-        Scroll
-        <motion.span
-          animate={{ y: [0, 5, 0] }}
-          transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-          className="text-accent"
-        >
-          v
-        </motion.span>
-      </motion.a>
 
       <motion.div
         key={popTick}

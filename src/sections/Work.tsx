@@ -4,6 +4,9 @@ import { motion } from "framer-motion";
 import { ProjectCard } from "@/components/ProjectCard";
 import { projects } from "@/data/projects";
 
+const placeholderSlots = [0, 1, 2];
+
+
 export function Work() {
   const hasProjects = projects.length > 0;
 
@@ -18,6 +21,12 @@ export function Work() {
         hasProjects ? "pb-28" : "pb-14"
       }`}
     >
+      <p
+        aria-hidden="true"
+        className="pointer-events-none absolute right-6 top-6 hidden font-mono text-[10px] uppercase tracking-[0.24em] text-text-muted/45 sm:right-10 sm:block lg:right-16"
+      >
+        01 / Work
+      </p>
       <div className="mx-auto max-w-[1200px]">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,380px)] lg:items-end">
           <motion.div
@@ -27,7 +36,7 @@ export function Work() {
             transition={{ delay: 0.05, duration: 0.35 }}
           >
             <p className="font-mono text-xs font-bold uppercase tracking-[0.45em] text-text-muted">Selected Builds</p>
-            <h2 className="mt-5 font-heading text-[clamp(3.2rem,8.5vw,7.4rem)] font-bold leading-[0.88] tracking-[-0.07em] text-text-main">
+            <h2 className="mt-5 font-heading text-[clamp(2.9rem,10vw,7.4rem)] font-bold leading-[0.88] tracking-[-0.07em] text-text-main">
               Work
             </h2>
           </motion.div>
@@ -46,6 +55,27 @@ export function Work() {
           <div className="mt-14 columns-1 gap-7 md:columns-2">
             {projects.map((project, index) => (
               <ProjectCard key={project.id} project={project} index={index} />
+            ))}
+          </div>
+        )}
+
+        {!hasProjects && (
+          <div className="mt-14 grid gap-5 md:grid-cols-3">
+            {placeholderSlots.map((slot, index) => (
+              <motion.article
+                key={slot}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.35 }}
+                transition={{ delay: index * 0.06, duration: 0.36, ease: "easeOut" }}
+                className="group relative flex min-h-[190px] items-center justify-center overflow-hidden border border-[rgba(240,253,244,0.08)] bg-[rgba(0,0,0,0.28)] p-5 transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-1 hover:border-primary hover:shadow-[0_0_20px_rgba(74,222,128,0.12)]"
+              >
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,#4ade80,#facc15,transparent)] opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+                />
+                <p className="font-mono text-xs uppercase tracking-[0.24em] text-text-muted">Coming soon</p>
+              </motion.article>
             ))}
           </div>
         )}
