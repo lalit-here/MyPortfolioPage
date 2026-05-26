@@ -6,6 +6,7 @@ const education = [
   {
     level: "University",
     institution: "Manipal Institute of Technology, Bengaluru",
+    institutionHref: "https://www.manipal.edu/mu/campuses/mahe-bengaluru/academics/institution-list/mit-blr.html",
     credential: "Bachelor of Technology (B.Tech)",
     focus: "Information Technology",
     duration: "August 2024 - July 2028",
@@ -24,6 +25,7 @@ const education = [
   {
     level: "Class X",
     institution: "Sloka the Hyderabad Waldorf School",
+    institutionHref: "https://www.facebook.com/slokawaldorf/",
     credential: "CBSE",
     focus: "Secondary School",
     duration: "Completed 2022",
@@ -87,7 +89,18 @@ export function Education() {
                   <h3 className="mt-3 font-heading text-[clamp(1.4rem,3vw,2.1rem)] font-bold leading-tight text-text-main">
                     {entry.credential}
                   </h3>
-                  <p className="mt-4 font-sans text-lg text-text-main">{entry.institution}</p>
+                  {entry.institutionHref ? (
+                    <a
+                      href={entry.institutionHref}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mt-4 inline-flex w-fit font-sans text-lg text-text-main underline-offset-4 transition-colors duration-200 hover:text-primary hover:underline"
+                    >
+                      {entry.institution}
+                    </a>
+                  ) : (
+                    <p className="mt-4 font-sans text-lg text-text-main">{entry.institution}</p>
+                  )}
                   <p className="mt-2 font-sans text-base leading-7 text-text-muted">{entry.focus}</p>
                 </div>
 
