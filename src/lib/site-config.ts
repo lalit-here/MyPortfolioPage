@@ -46,6 +46,11 @@ export type SiteContactLink = {
   value: string;
 };
 
+const DEFAULT_CONTACT_EMAIL = "lalit.k.vaddina@gmail.com";
+const DEFAULT_LINKEDIN_URL = "https://www.linkedin.com/in/lalitkvaddina/";
+const DEFAULT_GITHUB_URL = "https://github.com/lalit-here";
+const DEFAULT_INSTAGRAM_URL = "https://www.instagram.com/lalit_jpeg/";
+
 function urlDisplayValue(url: string): string {
   try {
     const u = new URL(url);
@@ -61,12 +66,12 @@ function urlDisplayValue(url: string): string {
 export function getContactLinks(): SiteContactLink[] {
   const links: SiteContactLink[] = [];
 
-  const email = sanitizeMailtoEmail(envTrim("CONTACT_EMAIL") ?? "");
+  const email = sanitizeMailtoEmail(envTrim("CONTACT_EMAIL") ?? DEFAULT_CONTACT_EMAIL);
   if (email) {
     links.push({ label: "Email", href: `mailto:${email}`, value: email });
   }
 
-  const linkedinRaw = envTrim("LINKEDIN_URL");
+  const linkedinRaw = envTrim("LINKEDIN_URL") ?? DEFAULT_LINKEDIN_URL;
   const linkedin = linkedinRaw ? sanitizePublicPageUrl(linkedinRaw) : undefined;
   if (linkedin) {
     links.push({
@@ -76,7 +81,7 @@ export function getContactLinks(): SiteContactLink[] {
     });
   }
 
-  const githubRaw = envTrim("GITHUB_URL");
+  const githubRaw = envTrim("GITHUB_URL") ?? DEFAULT_GITHUB_URL;
   const github = githubRaw ? sanitizePublicPageUrl(githubRaw) : undefined;
   if (github) {
     links.push({
@@ -86,7 +91,7 @@ export function getContactLinks(): SiteContactLink[] {
     });
   }
 
-  const instagramRaw = envTrim("INSTAGRAM_URL");
+  const instagramRaw = envTrim("INSTAGRAM_URL") ?? DEFAULT_INSTAGRAM_URL;
   const instagram = instagramRaw ? sanitizePublicPageUrl(instagramRaw) : undefined;
   if (instagram) {
     links.push({
