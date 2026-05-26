@@ -97,6 +97,7 @@ export function Contact({ links, resumeUrl }: ContactProps) {
   });
   const [status, setStatus] = useState<SubmitStatus>("idle");
   const [feedback, setFeedback] = useState("");
+  const [copiedContact, setCopiedContact] = useState("");
 
   const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
@@ -127,6 +128,25 @@ export function Contact({ links, resumeUrl }: ContactProps) {
       setStatus("error");
       setFeedback(error instanceof Error ? error.message : "Could not send message.");
     }
+  };
+
+  const handleCopyEmail = async (email: string) => {
+    try {
+      await navigator.clipboard.writeText(email);
+    } catch {
+      const fallbackInput = document.createElement("textarea");
+      fallbackInput.value = email;
+      fallbackInput.setAttribute("readonly", "");
+      fallbackInput.style.position = "fixed";
+      fallbackInput.style.opacity = "0";
+      document.body.appendChild(fallbackInput);
+      fallbackInput.select();
+      document.execCommand("copy");
+      document.body.removeChild(fallbackInput);
+    }
+
+    setCopiedContact("Email");
+    window.setTimeout(() => setCopiedContact(""), 1400);
   };
 
   return (
@@ -283,27 +303,53 @@ export function Contact({ links, resumeUrl }: ContactProps) {
               Add CONTACT_EMAIL, LINKEDIN_URL, GITHUB_URL, and/or INSTAGRAM_URL in .env.local (see .env.example).
             </p>
           ) : null}
-          {links.map((link, index) => (
-            <motion.a
-              key={`${link.label}-${link.href}`}
-              href={link.href}
-              custom={index}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.35 }}
-              variants={linkVariants}
-              className="group relative flex min-w-0 items-center justify-center overflow-hidden border border-[rgba(240,253,244,0.08)] bg-[linear-gradient(90deg,rgba(255,255,255,0.015),rgba(255,255,255,0.005))] px-3 py-4 font-mono text-[11px] uppercase tracking-[0.16em] text-text-main transition-colors duration-200 hover:border-primary hover:text-primary sm:px-4 sm:text-xs sm:tracking-[0.18em]"
-            >
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted transition-colors duration-200 group-hover:text-accent">
-                <ContactIcon label={link.label} />
-              </span>
-              <span className="pointer-events-none absolute inset-x-6 bottom-2 h-px origin-center scale-x-0 bg-[linear-gradient(90deg,transparent,#4ade80,#facc15,transparent)] transition-transform duration-300 group-hover:scale-x-100" />
-              <span className="shrink-0 whitespace-nowrap text-center">{link.label}</span>
-              <span className="absolute right-4 top-1/2 -translate-y-1/2 text-accent transition-transform duration-200 group-hover:translate-x-1">
-                ↗
-              </span>
-            </motion.a>
-          ))}
+          {links.map((link, index) => {
+            const isEmail = link.label === "Email";
+            const isCopied = copiedContact === link.label;
+            const cardClassName =
+              "group relative flex min-w-0 items-center justify-center overflow-hidden border border-[rgba(240,253,244,0.08)] bg-[linear-gradient(90deg,rgba(255,255,255,0.015),rgba(255,255,255,0.005))] px-3 py-4 font-mono text-[11px] uppercase tracking-[0.16em] text-text-main transition-colors duration-200 hover:border-primary hover:text-primary sm:px-4 sm:text-xs sm:tracking-[0.18em]";
+            const cardContent = (
+              <>
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted transition-colors duration-200 group-hover:text-accent">
+                  <ContactIcon label={link.label} />
+                </span>
+                <span className="pointer-events-none absolute inset-x-6 bottom-2 h-px origin-center scale-x-0 bg-[linear-gradient(90deg,transparent,#4ade80,#facc15,transparent)] transition-transform duration-300 group-hover:scale-x-100" />
+                <span className="shrink-0 whitespace-nowrap text-center">{link.label}</span>
+                <span className="absolute right-4 top-1/2 -translate-y-1/2 text-accent transition-transform duration-200 group-hover:translate-x-1">
+                  {isEmail ? (isCopied ? "Copied" : "Copy") : "↗"}
+                </span>
+              </>
+            );
+
+            return isEmail ? (
+              <motion.button
+                key={`${link.label}-${link.href}`}
+                type="button"
+                onClick={() => handleCopyEmail(link.value)}
+                custom={index}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.35 }}
+                variants={linkVariants}
+                className={`${cardClassName} appearance-none`}
+              >
+                {cardContent}
+              </motion.button>
+            ) : (
+              <motion.a
+                key={`${link.label}-${link.href}`}
+                href={link.href}
+                custom={index}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.35 }}
+                variants={linkVariants}
+                className={cardClassName}
+              >
+                {cardContent}
+              </motion.a>
+            );
+          })}
         </div>
       </div>
     </motion.section>
