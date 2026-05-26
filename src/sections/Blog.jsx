@@ -10,16 +10,19 @@ const featuredArticle = {
   readTime: "DEV article",
 };
 
+const defaultFeaturedHref =
+  "https://dev.to/lalit-here/vibe-coding-is-a-tool-not-a-shortcut-most-people-are-using-it-wrong-2gkn";
+
 const articleVariants = {
   hidden: { opacity: 0, y: 22 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.38, ease: "easeOut" } },
 };
 
 /**
- * @param {{ featuredHref?: string }} props URL from `BLOG_FEATURED_URL` (server-injected).
+ * @param {{ featuredHref?: string }} props Optional URL from `BLOG_FEATURED_URL` (server-injected).
  */
 export function Blog({ featuredHref }) {
-  const articles = featuredHref ? [{ ...featuredArticle, href: featuredHref }] : [];
+  const articles = [{ ...featuredArticle, href: featuredHref ?? defaultFeaturedHref }];
   return (
     <motion.section
       id="blog"
