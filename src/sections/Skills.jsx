@@ -28,75 +28,89 @@ import {
   siVercel,
 } from "simple-icons";
 
-/** Brand glow as RGB triples for tightly localized ambient light. */
-const skillMeta = {
-  Python: { icon: siPython, glow: "55 118 171", scale: 1 },
-  Java: { icon: siOpenjdk, glow: "234 45 46", scale: 1.05 },
-  JavaScript: { icon: siJavascript, glow: "247 223 30", scale: 0.94 },
-  TypeScript: { icon: siTypescript, glow: "49 120 198", scale: 0.94 },
-  SQL: { glow: "65 105 225", scale: 1 },
-  React: { icon: siReact, glow: "97 218 251", scale: 1.08 },
-  "Next.js": { icon: siNextdotjs, glow: "240 253 244", scale: 1 },
-  "Tailwind CSS": { icon: siTailwindcss, glow: "6 182 212", scale: 1.02 },
-  HTML: { icon: siHtml5, glow: "227 79 38", scale: 1 },
-  CSS: { icon: siCss, glow: "102 51 153", scale: 1 },
-  "Node.js": { icon: siNodedotjs, glow: "51 153 51", scale: 1.05 },
-  Express: { icon: siExpress, glow: "240 253 244", scale: 1.08 },
-  "REST APIs": { glow: "74 222 128", scale: 1 },
-  PostgreSQL: { icon: siPostgresql, glow: "65 105 225", scale: 1.02 },
-  MongoDB: { icon: siMongodb, glow: "71 162 72", scale: 1.02 },
-  Pandas: { icon: siPandas, glow: "150 100 255", scale: 0.96 },
-  NumPy: { icon: siNumpy, glow: "77 171 207", scale: 1 },
-  "scikit-learn": { icon: siScikitlearn, glow: "247 147 30", scale: 1 },
-  TensorFlow: { icon: siTensorflow, glow: "255 111 0", scale: 1 },
-  Git: { icon: siGit, glow: "240 80 50", scale: 1 },
-  GitHub: { icon: siGithub, glow: "240 253 244", scale: 1 },
-  Docker: { icon: siDocker, glow: "36 150 237", scale: 1.06 },
-  Linux: { icon: siLinux, glow: "252 198 36", scale: 1.04 },
-  Postman: { icon: siPostman, glow: "255 108 55", scale: 0.98 },
-  Vercel: { icon: siVercel, glow: "240 253 244", scale: 0.92 },
-  AWS: { glow: "255 153 0", scale: 1 },
-  Kubernetes: { icon: siKubernetes, glow: "50 108 229", scale: 1 },
-};
+/**
+ * @typedef {{ name: string, icon?: { path: string }, glow: string, scale?: number }} Skill
+ * @typedef {{ id: string, title: string, exploring?: boolean, skills: Skill[] }} SkillCategory
+ */
 
-const skillGroups = [
+/** @type {SkillCategory[]} */
+const skillCategories = [
   {
+    id: "languages",
     title: "Languages",
-    items: ["Python", "Java", "JavaScript", "TypeScript", "SQL"],
+    skills: [
+      { name: "Python", icon: siPython, glow: "55 118 171", scale: 1 },
+      { name: "Java", icon: siOpenjdk, glow: "234 45 46", scale: 1.04 },
+      { name: "JavaScript", icon: siJavascript, glow: "247 223 30", scale: 0.94 },
+      { name: "TypeScript", icon: siTypescript, glow: "49 120 198", scale: 0.94 },
+      { name: "SQL", glow: "65 105 225", scale: 1 },
+    ],
   },
   {
+    id: "frontend",
     title: "Frontend",
-    items: ["React", "Next.js", "Tailwind CSS", "HTML", "CSS"],
+    skills: [
+      { name: "React", icon: siReact, glow: "97 218 251", scale: 1.06 },
+      { name: "Next.js", icon: siNextdotjs, glow: "240 253 244", scale: 1 },
+      { name: "Tailwind CSS", icon: siTailwindcss, glow: "6 182 212", scale: 1 },
+      { name: "HTML", icon: siHtml5, glow: "227 79 38", scale: 1 },
+      { name: "CSS", icon: siCss, glow: "102 51 153", scale: 1 },
+    ],
   },
   {
+    id: "backend",
     title: "Backend",
-    items: ["Node.js", "Express", "REST APIs", "PostgreSQL", "MongoDB"],
+    skills: [
+      { name: "Node.js", icon: siNodedotjs, glow: "51 153 51", scale: 1.04 },
+      { name: "Express", icon: siExpress, glow: "240 253 244", scale: 1.06 },
+      { name: "REST APIs", glow: "74 222 128", scale: 1 },
+      { name: "PostgreSQL", icon: siPostgresql, glow: "65 105 225", scale: 1 },
+      { name: "MongoDB", icon: siMongodb, glow: "71 162 72", scale: 1 },
+    ],
   },
   {
+    id: "data-ai",
     title: "Data & AI",
-    items: ["Pandas", "NumPy", "scikit-learn", "TensorFlow"],
+    skills: [
+      { name: "Pandas", icon: siPandas, glow: "150 100 255", scale: 0.96 },
+      { name: "NumPy", icon: siNumpy, glow: "77 171 207", scale: 1 },
+      { name: "scikit-learn", icon: siScikitlearn, glow: "247 147 30", scale: 1 },
+      { name: "TensorFlow", icon: siTensorflow, glow: "255 111 0", scale: 1 },
+    ],
   },
   {
+    id: "tools",
     title: "Tools",
-    items: ["Git", "GitHub", "Docker", "Linux", "Postman", "Vercel"],
+    skills: [
+      { name: "Git", icon: siGit, glow: "240 80 50", scale: 1 },
+      { name: "GitHub", icon: siGithub, glow: "240 253 244", scale: 1 },
+      { name: "Docker", icon: siDocker, glow: "36 150 237", scale: 1.05 },
+      { name: "Linux", icon: siLinux, glow: "252 198 36", scale: 1.02 },
+      { name: "Postman", icon: siPostman, glow: "255 108 55", scale: 0.98 },
+      { name: "Vercel", icon: siVercel, glow: "240 253 244", scale: 0.92 },
+    ],
   },
   {
-    title: "Currently Exploring",
+    id: "exploring",
+    title: "Exploring",
     exploring: true,
-    items: ["AWS", "Kubernetes"],
+    skills: [
+      { name: "AWS", glow: "255 153 0", scale: 1 },
+      { name: "Kubernetes", icon: siKubernetes, glow: "50 108 229", scale: 1 },
+    ],
   },
 ];
 
-const groupVariants = {
-  hidden: { opacity: 0, y: 14 },
+const rowVariants = {
+  hidden: { opacity: 0, y: 12 },
   visible: (index) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: index * 0.04, duration: 0.34, ease: "easeOut" },
+    transition: { delay: index * 0.035, duration: 0.32, ease: "easeOut" },
   }),
 };
 
-function NeutralMark({ name }) {
+function NeutralLogo({ name }) {
   if (name === "AWS") {
     return (
       <svg aria-hidden="true" viewBox="0 0 24 24" className="h-full w-full">
@@ -130,75 +144,81 @@ function NeutralMark({ name }) {
     );
   }
 
-  return (
-    <span className="block h-full w-full rounded-[2px] border border-current opacity-60" />
-  );
+  return <span className="block h-full w-full rounded-[1px] border border-current opacity-50" />;
 }
 
-function SkillMark({ icon, name, scale = 1 }) {
+function SkillLogo({ skill }) {
+  const scale = skill.scale ?? 1;
+
   return (
-    <span className="relative flex h-[18px] w-[18px] shrink-0 items-center justify-center">
-      <span
-        className="flex h-[16px] w-[16px] items-center justify-center"
-        style={{ transform: `scale(${scale})` }}
-      >
-        {icon ? (
+    <span className="relative flex h-5 w-5 shrink-0 items-center justify-center">
+      <span className="flex h-[18px] w-[18px] items-center justify-center" style={{ transform: `scale(${scale})` }}>
+        {skill.icon ? (
           <svg aria-hidden="true" viewBox="0 0 24 24" className="h-full w-full">
-            <path d={icon.path} fill="currentColor" />
+            <path d={skill.icon.path} fill="currentColor" />
           </svg>
         ) : (
-          <NeutralMark name={name} />
+          <NeutralLogo name={skill.name} />
         )}
       </span>
     </span>
   );
 }
 
-function SkillItem({ name, exploring = false }) {
-  const meta = skillMeta[name] ?? { glow: "74 222 128", scale: 1 };
-  const glow = meta.glow;
-
+function SkillItem({ skill, exploring = false }) {
   return (
-    <li>
+    <li
+      className={[
+        "transition-opacity duration-[200ms] ease-out",
+        "group-hover/skills:opacity-[0.42] group-focus-within/skills:opacity-[0.42]",
+        "hover:!opacity-100 focus-within:!opacity-100",
+        "motion-reduce:transition-none",
+        exploring ? "opacity-[0.78]" : "opacity-100",
+      ].join(" ")}
+    >
       <button
         type="button"
-        tabIndex={0}
-        aria-label={exploring ? `${name}, currently exploring` : name}
-        className={[
-          "group relative inline-flex items-center gap-2.5 bg-transparent p-1 text-left",
-          "outline-none transition-[color,opacity] duration-[220ms] ease-out",
-          "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent",
-          exploring ? "opacity-[0.72] hover:opacity-100 focus-visible:opacity-100" : "opacity-100",
-        ].join(" ")}
+        aria-label={exploring ? `${skill.name}, currently exploring` : skill.name}
+        className="group/skill relative inline-flex items-center gap-2.5 bg-transparent py-1 pr-1 text-left outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
       >
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute left-[3px] top-1/2 z-0 h-4 w-4 -translate-y-1/2 rounded-full opacity-0 blur-[10px] transition-opacity duration-[220ms] ease-out group-hover:opacity-100 group-focus-visible:opacity-100 motion-reduce:transition-none"
-          style={{ backgroundColor: `rgb(${glow} / 0.55)` }}
+          className="pointer-events-none absolute left-0.5 top-1/2 z-0 h-[14px] w-[14px] -translate-y-1/2 rounded-full opacity-0 blur-[9px] transition-opacity duration-[200ms] ease-out group-hover/skill:opacity-100 group-focus-visible/skill:opacity-100 motion-reduce:transition-none motion-reduce:group-hover/skill:opacity-0 motion-reduce:group-focus-visible/skill:opacity-40"
+          style={{ backgroundColor: `rgb(${skill.glow} / 0.5)` }}
         />
-        <span
-          className={[
-            "relative z-[1] text-text-muted/80",
-            "transition-[color,transform,filter,opacity] duration-[220ms] ease-out",
-            "group-hover:scale-[1.04] group-hover:text-text-main group-hover:brightness-125",
-            "group-focus-visible:scale-[1.04] group-focus-visible:text-text-main group-focus-visible:brightness-125",
-            "motion-reduce:transition-none motion-reduce:group-hover:scale-100 motion-reduce:group-focus-visible:scale-100",
-          ].join(" ")}
-        >
-          <SkillMark icon={meta.icon} name={name} scale={meta.scale} />
+
+        <span className="relative z-[1] text-text-muted transition-[color,transform,filter] duration-[200ms] ease-out group-hover/skill:scale-[1.04] group-hover/skill:text-text-main group-hover/skill:brightness-125 group-focus-visible/skill:scale-[1.04] group-focus-visible/skill:text-text-main group-focus-visible/skill:brightness-125 motion-reduce:transition-none motion-reduce:group-hover/skill:scale-100 motion-reduce:group-focus-visible/skill:scale-100">
+          <SkillLogo skill={skill} />
         </span>
-        <span
-          className={[
-            "relative z-[1] font-sans text-[0.9375rem] font-medium leading-none tracking-normal text-text-main/78",
-            "transition-colors duration-[220ms] ease-out",
-            "group-hover:text-text-main group-focus-visible:text-text-main",
-            "motion-reduce:transition-none",
-          ].join(" ")}
-        >
-          {name}
+
+        <span className="relative z-[1] font-sans text-[15px] font-medium leading-none tracking-[-0.01em] text-text-main/82 transition-colors duration-[200ms] ease-out group-hover/skill:text-text-main group-focus-visible/skill:text-text-main motion-reduce:transition-none sm:text-[16px]">
+          {skill.name}
         </span>
       </button>
     </li>
+  );
+}
+
+function SkillCategoryRow({ category, index }) {
+  return (
+    <motion.div
+      custom={index}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={rowVariants}
+      className="grid gap-3 md:grid-cols-[minmax(7.5rem,22%)_minmax(0,1fr)] md:items-start md:gap-x-8 lg:grid-cols-[minmax(8rem,20%)_minmax(0,1fr)] lg:gap-x-10"
+    >
+      <h3 className="pt-1 font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-text-muted">
+        {category.title}
+      </h3>
+
+      <ul className="group/skills flex flex-wrap items-center gap-x-5 gap-y-2.5 sm:gap-x-6 sm:gap-y-3">
+        {category.skills.map((skill) => (
+          <SkillItem key={skill.name} skill={skill} exploring={Boolean(category.exploring)} />
+        ))}
+      </ul>
+    </motion.div>
   );
 }
 
@@ -220,50 +240,19 @@ export function Skills() {
       </p>
 
       <div className="mx-auto max-w-[1200px]">
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,380px)] lg:items-start">
-          <div className="lg:sticky lg:top-28">
-            <p className="font-mono text-xs font-bold uppercase tracking-[0.45em] text-text-muted">My Stack</p>
-            <h2 className="mt-5 font-heading text-[clamp(2.9rem,10vw,7.4rem)] font-bold leading-[0.88] tracking-[-0.07em] text-text-main">
-              Skills
-            </h2>
-          </div>
-          <p className="max-w-md font-sans text-base leading-7 text-text-muted">
-            Technologies I use to build and ship — organized by how they show up in my work.
+        <div className="max-w-2xl">
+          <p className="font-mono text-xs font-bold uppercase tracking-[0.45em] text-text-muted">My Stack</p>
+          <h2 className="mt-5 font-heading text-[clamp(2.9rem,10vw,7.4rem)] font-bold leading-[0.88] tracking-[-0.07em] text-text-main">
+            Skills
+          </h2>
+          <p className="mt-5 max-w-md font-sans text-base leading-7 text-text-muted">
+            Technologies I use to build and experiment.
           </p>
         </div>
 
-        <div className="mt-12 space-y-7 md:mt-14 md:space-y-8">
-          {skillGroups.map((group, index) => (
-            <motion.div
-              key={group.title}
-              custom={index}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={groupVariants}
-              className={
-                index === 0
-                  ? ""
-                  : "border-t border-[rgba(240,253,244,0.05)] pt-7 md:pt-8"
-              }
-            >
-              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                <h3 className="font-mono text-[11px] font-bold uppercase tracking-[0.26em] text-accent">
-                  {group.title}
-                </h3>
-                {group.exploring ? (
-                  <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-text-muted/70">
-                    Learning in progress
-                  </span>
-                ) : null}
-              </div>
-
-              <ul className="mt-3.5 flex flex-wrap items-center gap-x-5 gap-y-2.5 sm:gap-x-6">
-                {group.items.map((name) => (
-                  <SkillItem key={name} name={name} exploring={Boolean(group.exploring)} />
-                ))}
-              </ul>
-            </motion.div>
+        <div className="mt-12 space-y-8 md:mt-14 md:space-y-9">
+          {skillCategories.map((category, index) => (
+            <SkillCategoryRow key={category.id} category={category} index={index} />
           ))}
         </div>
       </div>
