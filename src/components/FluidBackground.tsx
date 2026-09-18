@@ -27,7 +27,7 @@ type Disturbance = {
 const SECTION_OPACITY: Record<string, number> = {
   top: 1,
   work: 0.5,
-  skills: 0.18,
+  skills: 0.06,
   education: 0.46,
   blog: 0.58,
   about: 0.3,
