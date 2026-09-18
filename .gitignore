@@ -43,3 +43,6 @@ next-env.d.ts
 # local visual testing artifacts
 .playwright-mcp/
 portfolio-*.png
+
+.vercel
+.env*

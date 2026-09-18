@@ -42,7 +42,8 @@ export async function middleware(request: NextRequest) {
     attachRateLimitHeaders(res, result);
     return res;
   } catch {
-    return NextResponse.json({ error: "Service unavailable" }, { status: 503 });
+    // Never block contact/API on rate-limit infra failures.
+    return NextResponse.next();
   }
 }
 

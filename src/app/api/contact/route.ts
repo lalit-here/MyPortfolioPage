@@ -37,6 +37,13 @@ function escapeHtml(value: string) {
     .replace(/'/g, "&#39;");
 }
 
+/** Strip accidental wrapping quotes from Vercel/dashboard-copied env values. */
+function unwrapEnv(value: string | undefined): string | undefined {
+  const trimmed = value?.trim();
+  if (!trimmed) return undefined;
+  return trimmed.replace(/^(['"])(.*)\1$/, "$2").trim() || undefined;
+}
+
 export async function POST(request: Request) {
   const parsed = await readBoundedJson<ContactPayload>(request);
   if (!parsed.ok) return parsed.response;
@@ -49,9 +56,10 @@ export async function POST(request: Request) {
     return Response.json({ error: "Please provide a valid name, email, and message." }, { status: 400 });
   }
 
-  const apiKey = process.env.RESEND_API_KEY?.trim();
-  const to = process.env.CONTACT_TO_EMAIL?.trim() || process.env.CONTACT_EMAIL?.trim();
-  const from = process.env.CONTACT_FROM_EMAIL?.trim() || "Portfolio Contact <onboarding@resend.dev>";
+  const apiKey = unwrapEnv(process.env.RESEND_API_KEY);
+  const to = unwrapEnv(process.env.CONTACT_TO_EMAIL) || unwrapEnv(process.env.CONTACT_EMAIL);
+  const from =
+    unwrapEnv(process.env.CONTACT_FROM_EMAIL) || "Portfolio Contact <onboarding@resend.dev>";
 
   if (!apiKey || !to) {
     return Response.json({ error: "Contact inbox is not configured yet." }, { status: 503 });
@@ -82,6 +90,7 @@ export async function POST(request: Request) {
   });
 
   if (error) {
+    console.error("Resend contact send failed:", error);
     return Response.json({ error: "Could not send message. Please try again later." }, { status: 502 });
   }
 

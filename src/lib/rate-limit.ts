@@ -192,25 +192,30 @@ function getUpstashRatelimits(): { login: Ratelimit; api: Ratelimit } {
 
 /**
  * Distributed limit when `UPSTASH_REDIS_REST_*` is set; otherwise in-memory (local dev).
+ * If Upstash is configured but unreachable, fall back to memory so contact/API keep working.
  */
 export async function checkRateLimit(
   ip: string,
   kind: "login" | "api",
 ): Promise<RateLimitResult> {
   const key = rateLimitBucketKey(kind, ip);
+  const cfg = kind === "login" ? getLoginRateLimitConfig() : getApiRateLimitConfig();
 
   if (isUpstashRedisConfigured()) {
-    const { login, api } = getUpstashRatelimits();
-    const rl = kind === "login" ? login : api;
-    const { success, limit, remaining, reset } = await rl.limit(key);
-    return {
-      ok: success,
-      limit,
-      remaining,
-      resetAt: reset,
-    };
+    try {
+      const { login, api } = getUpstashRatelimits();
+      const rl = kind === "login" ? login : api;
+      const { success, limit, remaining, reset } = await rl.limit(key);
+      return {
+        ok: success,
+        limit,
+        remaining,
+        resetAt: reset,
+      };
+    } catch {
+      // Upstash outage / bad credentials must not take down the contact form.
+    }
   }
 
-  const cfg = kind === "login" ? getLoginRateLimitConfig() : getApiRateLimitConfig();
   return consumeRateLimit(key, cfg.max, cfg.windowMs);
 }
